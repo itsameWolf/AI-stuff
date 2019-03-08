@@ -18,7 +18,7 @@ filename = 'iris.data'
 data = np.loadtxt(filename,delimiter=',',converters={4:IrisToNumber})
 np.random.shuffle(data)
 
-test = nn.testPerceptron(nn.trainPerceptron(data[:,0:4],data[:,4]),data)
+test = nn.testPerceptron(nn.trainPerceptron(data[:,0:4],data[:,4],0.2),data)
 
 print(test)
 
