@@ -1,22 +1,21 @@
-import csv
 import numpy as np
 import matplotlib.pyplot as plt
 import Perceptron as nn
 
-def IrisToNumber (iris):
+def IrisToNumber (iris):            #function used to conver the iris classification string into numerical values
     if iris == b'Iris-setosa':
         return 1
     else:
         return 0
 
-def graphPerceptron (weigth, range_x, marker):
+def graphPerceptron (weigth, range_x, marker):          #graph a linear classifier perceptron i.e. 2 inputs 1 output
     x = np.array(range_x)
     y = ((weigth[0]*x)/weigth[1])+(weigth[2])/weigth[1]
     plt.plot(x,y,marker)
 
 filename = 'iris.data'
-data = np.loadtxt(filename,delimiter=',',converters={4:IrisToNumber})
-np.random.shuffle(data)
+data = np.loadtxt(filename,delimiter=',',converters={4:IrisToNumber})           #load the iris dataset
+np.random.shuffle(data)                                                         #randomly shuffle the rows of the dataset
 
 test = nn.testPerceptron(nn.trainPerceptron(data[:,0:4],data[:,4],0.2),data)
 
@@ -59,10 +58,3 @@ c_other = 'b'
 #plt.scatter(x=petal_length_other, y=petal_width_other,c=c_other, marker='v')
 
 #plt.show()
-#print(data.shape)
-
-#c = nn.solvePerceptron(a,b,4,1)
-
-#print(c)
-
-

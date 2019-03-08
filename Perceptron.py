@@ -3,14 +3,14 @@ import numpy as np
 def sigmoid(x):                         #Sigmoid function
     return (1.0/(1.0+2.71828**(-x)))
 
-def solvePerceptron(weigths, inputs, activation = 0):  #given the weigths of a perceptron and the inputs calculate its output
-    dotProduct = np.dot(weigths,inputs)                #perform the dot product of inputs and outputs
-    if (activation == 0):                              #step activation function
+def solvePerceptron(weigths, inputs, activation = 0):               #given the weigths of a perceptron and the inputs calculate its output
+    dotProduct = np.dot(weigths,inputs)                             #perform the dot product of inputs and outputs
+    if (activation == 0):                                           #step activation function
         if (dotProduct <= 0):
             return 0
         else:
             return 1
-    elif (activation == 1):                            #sigmoid activation function
+    elif (activation == 1):                                         #sigmoid activation function
         return sigmoid(dotProduct)
     
 def trainPerceptron(inputs, outputs, learning_rate = 1):            #train a peceptron using a dataset
@@ -23,8 +23,10 @@ def trainPerceptron(inputs, outputs, learning_rate = 1):            #train a pec
     weigths = np.random.rand(n_weights)                             #initialise the weigths with random values
 
     for i in range(0,i_l):                                          #perceptron learning algorithm
+
         output = solvePerceptron(weigths, inputs_ww[i])
         input_i = inputs_ww[i]
+
         if output < outputs[i]:                                     #if the output is smaller than expected add the inputs to the respective weigths
             np.add(weigths,input_i*learning_rate,weigths)
         elif output > outputs[i]:                                   #if the output is bigger than expected subtract the inputs to the respective weigths
