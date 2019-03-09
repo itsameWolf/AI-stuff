@@ -5,7 +5,6 @@ def sigmoid(x):                         #Sigmoid function
 
 def solvePerceptron(weigths, inputs, activation = 0):               #given the weigths of a perceptron and the inputs calculate its output
     dotProduct = np.dot(weigths,inputs)                             #perform the dot product of inputs and outputs
-    #print(dotProduct)
     if (activation == 0):                                           #step activation function
         if (dotProduct <= 0):
             return 0
@@ -56,8 +55,7 @@ def testPerceptron(weights, dataset):                               #test a perc
 
     for i in range(0,i_l):
         output = solvePerceptron(weights,inputs_ww[i],0)
-        #print(output,outputs[i])
-        if  output == outputs[i]:   #whenever an item has been classified correctly increment the counter
+        if  output == outputs[i]:                                   #whenever an item has been classified correctly increment the counter
             correctly_classified += 1
     return (correctly_classified/i_l)*100                           #return the percentage of items that have been classified correctly          
 
@@ -67,3 +65,37 @@ def checkLearningProgress (weight_matrix,dataset):
     for i in range(i_l):
         accuracy[i] = testPerceptron(weight_matrix[i],dataset)
     return accuracy
+
+def perceptronLearning (dataset, max_iterations):
+
+    data_width = np.ma.size(dataset,1)
+    data_length = np.ma.size(dataset,0)
+
+    ones = np.ones((data_length,1))                                  
+    inputs = dataset[:,0:data_width-1]
+    inputs_ww = np.concatenate((inputs,ones),axis=1)
+    outputs = dataset[:,data_width-1]
+
+    weigths = np.random.rand(data_width)
+    
+    for i in range(max_iterations):
+
+        for j in range(data_length):
+
+            output = solvePerceptron(weigths, inputs_ww[j])
+            input_i = inputs_ww[j]
+
+            if output < outputs[jj:                                 
+
+                np.add(weigths,input_i,weigths)
+            
+            elif output > outputs[j]:                                   
+
+                np.subtract(weigths,input_i,weigths)
+        
+        accuracy = testPerceptron(weigths, dataset)
+
+        if accuracy == 100:
+            break
+    
+    return weigths, accuracy

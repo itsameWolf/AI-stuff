@@ -48,7 +48,7 @@ all_weigths = all_weigths_virginica
 
 #accuracy_over_itearation = nn.checkLearningProgress(all_weigths_setosa,data_setosa)
 #accuracy_over_itearation = nn.checkLearningProgress(all_weigths_versicolor,data_versicolor)
-accuracy_over_itearation = nn.checkLearningProgress(all_weigths_virginica,data_virginica)
+#accuracy_over_itearation = nn.checkLearningProgress(all_weigths_virginica,data_virginica)
 
 #print(accuracy_over_itearation)
 
@@ -60,7 +60,7 @@ w3 = all_weigths[:,3]
 th = all_weigths[:,4]
 
 plt.subplot(2,1,1)
-plt.plot(np.arange(150),w0,'r',w1,'b',w2,'g',w3,'y',th,'k')
+#plt.plot(np.arange(150),w0,'r',w1,'b',w2,'g',w3,'y',th,'k')
 w0_entry = mpatches.Patch(color='r', label='w0')
 w1_entry = mpatches.Patch(color='b', label='w1')
 w2_entry = mpatches.Patch(color='g', label='w2')
@@ -71,7 +71,7 @@ plt.ylabel('weights')
 plt.legend(handles=[w0_entry,w1_entry,w2_entry,w3_entry,th_entry])
 
 plt.subplot(2,1,2)
-plt.plot(np.arange(150),accuracy_over_itearation)
+#plt.plot(np.arange(150),accuracy_over_itearation)
 plt.xlabel('iteration')
 plt.ylabel('accuracy')
 
