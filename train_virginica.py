@@ -24,4 +24,4 @@ def virginica (iris):            #function used to conver the iris classificatio
 filename = 'iris.data'
 data = np.loadtxt(filename,delimiter=',',converters={4:virginica})
 
-print (nn.perceptronLearning(data,1000))
+print (nn.perceptronLearning(data,10000,0.1))

@@ -66,7 +66,7 @@ def checkLearningProgress (weight_matrix,dataset):
         accuracy[i] = testPerceptron(weight_matrix[i],dataset)
     return accuracy
 
-def perceptronLearning (dataset, max_iterations):
+def perceptronLearning (dataset, max_iterations, learning_rate = 1):
 
     data_width = np.ma.size(dataset,1)
     data_length = np.ma.size(dataset,0)
@@ -78,23 +78,30 @@ def perceptronLearning (dataset, max_iterations):
 
     weigths = np.random.rand(data_width)
     
-    for i in range(max_iterations):
+    i = 0
+    
+    while i < max_iterations:
 
         for j in range(data_length):
 
             output = solvePerceptron(weigths, inputs_ww[j])
             input_i = inputs_ww[j]
 
-            if output < outputs[jj:                                 
+            if output < outputs[j]:
 
-                np.add(weigths,input_i,weigths)
-            
-            elif output > outputs[j]:                                   
+                np.add(weigths,input_i*learning_rate,weigths)
 
-                np.subtract(weigths,input_i,weigths)
-        
+            elif output > outputs[j]:
+
+                np.subtract(weigths,input_i*learning_rate,weigths)
+
+            else:
+
+                weigths = weigths
+                
         accuracy = testPerceptron(weigths, dataset)
-
+        print(i)
+        i += 1
         if accuracy == 100:
             break
     
