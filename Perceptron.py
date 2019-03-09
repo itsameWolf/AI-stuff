@@ -5,7 +5,7 @@ def sigmoid(x):                         #Sigmoid function
 
 def solvePerceptron(weigths, inputs, activation = 0):               #given the weigths of a perceptron and the inputs calculate its output
     dotProduct = np.dot(weigths,inputs)                             #perform the dot product of inputs and outputs
-    print(dotProduct)
+    #print(dotProduct)
     if (activation == 0):                                           #step activation function
         if (dotProduct <= 0):
             return 0
@@ -14,7 +14,7 @@ def solvePerceptron(weigths, inputs, activation = 0):               #given the w
     elif (activation == 1):                                         #sigmoid activation function
         return sigmoid(dotProduct)
     
-def trainPerceptron(inputs, outputs, starting_weigts = 0, learning_rate = 1):            #train a peceptron using a dataset
+def trainPerceptron(inputs, outputs, starting_weigts = 0, learning_rate = 1, return_all_weigths = 0,):            #train a peceptron using a dataset
     n_weights = np.ma.size(inputs,1) +1                             #how many weights are needed for the perceptron includind the threshold
     if np.any(starting_weigts) == 0:
         weigths = np.random.rand(n_weights)                         #initialise the weigths with random values
@@ -23,7 +23,8 @@ def trainPerceptron(inputs, outputs, starting_weigts = 0, learning_rate = 1):   
     i_l = np.ma.size(inputs,0)                                      #lerngth of the datset
     ones = np.ones((i_l,1))                                         #create a column vector of one with as many rows as the input dataset
     inputs_ww = np.concatenate((inputs,ones),axis=1)                #add the one column vector to the input so that we can treat the threshold as a weight
-
+    weigth_storage = np.empty((i_l,n_weights))
+    
     for i in range(0,i_l):                                          #perceptron learning algorithm
 
         output = solvePerceptron(weigths, inputs_ww[i])
@@ -35,7 +36,12 @@ def trainPerceptron(inputs, outputs, starting_weigts = 0, learning_rate = 1):   
             np.subtract(weigths,input_i*learning_rate,weigths)
         else:
             weigths = weigths                                       #if the output is as expected keep the wigths unchanged
-    return weigths
+
+        weigth_storage[i] = weigths
+    if return_all_weigths:
+        return weigth_storage
+    else:
+        return weigths
 
 def testPerceptron(weights, dataset):                               #test a perceptron over a dataset and see how many items have been classified coreectly
 
@@ -50,7 +56,14 @@ def testPerceptron(weights, dataset):                               #test a perc
 
     for i in range(0,i_l):
         output = solvePerceptron(weights,inputs_ww[i],0)
-        print(output,outputs[i])
+        #print(output,outputs[i])
         if  output == outputs[i]:   #whenever an item has been classified correctly increment the counter
             correctly_classified += 1
     return (correctly_classified/i_l)*100                           #return the percentage of items that have been classified correctly          
+
+def checkLearningProgress (weight_matrix,dataset):
+    i_l = np.ma.size(weight_matrix,0)
+    accuracy = np.empty(i_l)
+    for i in range(i_l):
+        accuracy[i] = testPerceptron(weight_matrix[i],dataset)
+    return accuracy
