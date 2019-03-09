@@ -16,7 +16,7 @@ def versicolor (iris):            #function used to conver the iris classificati
         return 0
 
 def virginica (iris):            #function used to conver the iris classification string into numerical values
-    if iris == b'Iris-setosa':
+    if iris == b'Iris-virginica':
         return 1
     else:
         return 0
@@ -30,19 +30,25 @@ def graphPerceptron (weigth, range_x, marker):          #graph a linear classifi
     plt.plot(x,y,marker)
 
 filename = 'iris.data'
-data_setosa = np.loadtxt(filename,delimiter=',',converters={4:setosa})           #load the iris dataset for setosa classification
-data_versicolor = np.loadtxt(filename,delimiter=',',converters={4:versicolor})   #load the iris dataset for versicolor classifification
+#data_setosa = np.loadtxt(filename,delimiter=',',converters={4:setosa})           #load the iris dataset for setosa classification
+#data_versicolor = np.loadtxt(filename,delimiter=',',converters={4:versicolor})   #load the iris dataset for versicolor classifification
 data_virginica = np.loadtxt(filename,delimiter=',',converters={4:virginica})     #load the iris dataset for virginica classification
-
-np.random.shuffle(data_setosa)                                                    #randomly shuffle the rows of the dataset
-np.random.shuffle(data_versicolor)
+print (data_virginica)
+#np.random.shuffle(data_setosa)                                                    #randomly shuffle the rows of the dataset
+#np.random.shuffle(data_versicolor)
 np.random.shuffle(data_virginica)
 
-all_weigths = nn.trainPerceptron(data_versicolor[:,0:4],data_versicolor[:,4],return_all_weigths=1)
+#all_weigths_setosa = nn.trainPerceptron(data_setosa[:,0:4],data_setosa[:,4],return_all_weigths=1)
+#all_weigths_versicolor = nn.trainPerceptron(data_versicolor[:,0:4],data_versicolor[:,4],return_all_weigths=1)
+all_weigths_virginica = nn.trainPerceptron(data_virginica[:,0:4],data_virginica[:,4],return_all_weigths=1)
 
-test = nn.testPerceptron(all_weigths[149],data_versicolor)
+all_weigths = all_weigths_virginica
 
-accuracy_over_itearation = nn.checkLearningProgress(all_weigths,data_versicolor)
+#test = nn.testPerceptron(all_weigths[149],data_versicolor)
+
+#accuracy_over_itearation = nn.checkLearningProgress(all_weigths_setosa,data_setosa)
+#accuracy_over_itearation = nn.checkLearningProgress(all_weigths_versicolor,data_versicolor)
+accuracy_over_itearation = nn.checkLearningProgress(all_weigths_virginica,data_virginica)
 
 #print(accuracy_over_itearation)
 
