@@ -22,21 +22,24 @@ def virginica (iris):            #function used to conver the iris classificatio
         return 0
 
 filename = 'iris.data'
-data = np.loadtxt(filename,delimiter=',',converters={4:virginica})
+data = np.loadtxt(filename,delimiter=',',converters={4:versicolor})
 np.random.shuffle(data)
 
 iterations = 30
 learning_rate = 0.2
 
-(weigths, accuracy, accuracy_progression) = nn.perceptronLearning(data,iterations,learning_rate,98)
+(weigths, accuracy, accuracy_progression) = nn.perceptronLearning(data,iterations,learning_rate,78)
+
+print ('accuracy outside ', nn.testPerceptron(weigths,data))
 
 (tp,tn,fp,fn) = nn.confusionMatrix(weigths,data)
 
 print('weigths: ', weigths)
-print('accuracy: ', accuracy)
+print('max accuracy: ', max(accuracy_progression))
+print('final accuracy: ', accuracy)
 
-print('true positive: %d    true negative: %d',(tp,tn))
-print('false positive: %d   false negative: %d',(fp,fn))
+print('true positive: ',tp,'true negative: ',tn)
+print('false positive: ',fp,'false negative: ',fn)
 
 title = "%d_iterations_lambda=%f" %(len(accuracy_progression),learning_rate)
 path = "./Plots/%s.png" %(title)

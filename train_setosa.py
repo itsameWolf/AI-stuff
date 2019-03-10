@@ -22,13 +22,13 @@ def virginica (iris):            #function used to conver the iris classificatio
         return 0
 
 filename = 'iris.data'
-data = np.loadtxt(filename,delimiter=',',converters={4:virginica})
+data = np.loadtxt(filename,delimiter=',',converters={4:setosa})
 np.random.shuffle(data)
 
 iterations = 30
-learning_rate = 0.2
+learning_rate = 1
 
-(weigths, accuracy, accuracy_progression) = nn.perceptronLearning(data,iterations,learning_rate,98)
+(weigths, accuracy, accuracy_progression) = nn.perceptronLearning(data,iterations,learning_rate,100)
 
 (tp,tn,fp,fn) = nn.confusionMatrix(weigths,data)
 

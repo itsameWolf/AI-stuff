@@ -44,20 +44,24 @@ def trainPerceptron(inputs, outputs, starting_weigts = 0, learning_rate = 1, ret
 
 def testPerceptron(weights, dataset):                               #test a perceptron over a dataset and see how many items have been classified coreectly
 
-    i_l = np.ma.size(dataset,0)                                     #length of the dataset
-    data_width = np.size(weights)-1                                 #number of columns in the dataset
-    inputs = dataset[:,0:data_width]                                #separate the inputs 
-    ones = np.ones((i_l,1))                     
+    data_width = np.ma.size(dataset,1)
+    data_length = np.ma.size(dataset,0)                             #number of columns in the dataset
+
+    inputs = dataset[:,0:data_width-1]                              #separate the inputs 
+    ones = np.ones((data_length,1))                     
     inputs_ww = np.concatenate((inputs,ones),axis=1)                #add a one column vector for the threshold weigth
-    outputs = dataset[:,data_width]                                 #separate the outputs from the rest of the dataset
+    
+    outputs = dataset[:,data_width-1]                                 #separate the outputs from the rest of the dataset
 
     correctly_classified = 0                                        #initialise the counter for the items that have been classified correctly
 
-    for i in range(0,i_l):
+    for i in range(0,data_length):
         output = solvePerceptron(weights,inputs_ww[i],0)
+        #print (output, outputs[i], i)
         if  output == outputs[i]:                                   #whenever an item has been classified correctly increment the counter
             correctly_classified += 1
-    return (correctly_classified/i_l)*100                           #return the percentage of items that have been classified correctly          
+            #print(correctly_classified)
+    return (correctly_classified/data_length)*100                           #return the percentage of items that have been classified correctly          
 
 def checkLearningProgress (weight_matrix,dataset):
     i_l = np.ma.size(weight_matrix,0)
@@ -66,7 +70,7 @@ def checkLearningProgress (weight_matrix,dataset):
         accuracy[i] = testPerceptron(weight_matrix[i],dataset)
     return accuracy
 
-def perceptronLearning (dataset, max_iterations, learning_rate = 1):
+def perceptronLearning (dataset, max_iterations, learning_rate = 1, target_accuracy = 100):
 
     data_width = np.ma.size(dataset,1)
     data_length = np.ma.size(dataset,0)
@@ -77,6 +81,8 @@ def perceptronLearning (dataset, max_iterations, learning_rate = 1):
     outputs = dataset[:,data_width-1]
 
     weigths = np.random.rand(data_width)
+
+    accuracy_progression = []
     
     i = 0
     
@@ -97,12 +103,49 @@ def perceptronLearning (dataset, max_iterations, learning_rate = 1):
 
             else:
 
-                weigths = weigths
-                
-        accuracy = testPerceptron(weigths, dataset)
-        print(i)
+                weigths = weigths   
+
+            accuracy = testPerceptron(weigths,dataset)
+            accuracy_progression.append(accuracy)
+
+            if accuracy >= target_accuracy:
+                break
+
         i += 1
-        if accuracy == 100:
+        if accuracy >= target_accuracy:
             break
     
-    return weigths, accuracy
+    return weigths, accuracy, accuracy_progression
+
+def confusionMatrix(weights, dataset):
+
+    data_width = np.ma.size(dataset,1)
+    data_length = np.ma.size(dataset,0)
+
+    ones = np.ones((data_length,1))                                  
+    inputs = dataset[:,0:data_width-1]
+    inputs_ww = np.concatenate((inputs,ones),axis=1)
+    outputs = dataset[:,data_width-1]
+
+    true_positive = 0
+    true_negative = 0
+    false_positive = 0
+    false_negative = 0
+
+    for i in range(data_length):
+
+        output = solvePerceptron(weights, inputs_ww[i],0)
+
+        if output == outputs[i]:
+            if output == 1:
+                true_positive += 1
+            else:
+                true_negative += 1
+        else:
+            if output == 1:
+                false_positive += 1
+            else:
+                false_negative += 1
+    
+    return true_positive/data_length, true_negative/data_length, false_positive/data_length, false_negative/data_length
+
