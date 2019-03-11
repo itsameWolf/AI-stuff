@@ -12,23 +12,23 @@ def iris (iris):            #function used to conver the iris classification str
 
 def irisClassifier1(sepal_length, sepal_width, petal_length, petal_width):
 
-    inputs = [sepal_length, sepal_width, petal_length, petal_width, 1]
+    inputs = [sepal_length, sepal_width, petal_length, petal_width, 1]                              #input layer
 
-    weight_input_setosa = [-0.50070756,  2.35675675, -1.57468868, -1.05504908,  0.02127709]
+    weight_input_setosa = [-0.50070756,  2.35675675, -1.57468868, -1.05504908,  0.02127709]         #hidden layer
     weight_input_versicolor = [ 2.96015761, -5.7989648,   1.04779707, -5.10024532,  1.98070432]
     weight_input_virginica = [-2.50485896, -2.20186858,  3.62850465,  3.19246628, -0.98835995]
 
-    setosa_classifier = nn.solvePerceptron(weight_input_setosa,inputs)
+    setosa_classifier = nn.solvePerceptron(weight_input_setosa,inputs)                              #hidden layer outputs
     versicolor_classifier = nn.solvePerceptron(weight_input_versicolor,inputs)
     virginica_classifier = nn.solvePerceptron(weight_input_virginica,inputs)
 
     middle_layer = [setosa_classifier, versicolor_classifier, virginica_classifier, 1]
 
-    weight_output_setosa = [ 1.0, 0.0, 0.0, -0.5]
+    weight_output_setosa = [ 1.0, 0.0, 0.0, -0.5]                                                   #output layer
     weight_output_versicolor = [-0.5, 1, -0.5, -0.6]
     weight_output_virginica = [-1.1, -0.6, 0.5, 0.5]
 
-    setosa_output = nn.solvePerceptron(weight_output_setosa,middle_layer)
+    setosa_output = nn.solvePerceptron(weight_output_setosa,middle_layer)                           #outputs
     versicolor_output = nn.solvePerceptron(weight_output_versicolor, middle_layer)
     virginica_output = nn.solvePerceptron(weight_output_virginica,middle_layer)
 
