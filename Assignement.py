@@ -59,21 +59,21 @@ w2 = all_weigths[:,2]
 w3 = all_weigths[:,3]
 th = all_weigths[:,4]
 
-plt.subplot(2,1,1)
+#plt.subplot(2,1,1)
 #plt.plot(np.arange(150),w0,'r',w1,'b',w2,'g',w3,'y',th,'k')
-w0_entry = mpatches.Patch(color='r', label='w0')
-w1_entry = mpatches.Patch(color='b', label='w1')
-w2_entry = mpatches.Patch(color='g', label='w2')
-w3_entry = mpatches.Patch(color='y', label='w3')
-th_entry = mpatches.Patch(color='k', label='th')
-plt.title('weights_change_and_perceptron_accuracy_over_iterations')
-plt.ylabel('weights')
-plt.legend(handles=[w0_entry,w1_entry,w2_entry,w3_entry,th_entry])
+#w0_entry = mpatches.Patch(color='r', label='w0')
+#w1_entry = mpatches.Patch(color='b', label='w1')
+#w2_entry = mpatches.Patch(color='g', label='w2')
+#w3_entry = mpatches.Patch(color='y', label='w3')
+#th_entry = mpatches.Patch(color='k', label='th')
+#plt.title('weights_change_and_perceptron_accuracy_over_iterations')
+#plt.ylabel('weights')
+#plt.legend(handles=[w0_entry,w1_entry,w2_entry,w3_entry,th_entry])
 
-plt.subplot(2,1,2)
+#plt.subplot(2,1,2)
 #plt.plot(np.arange(150),accuracy_over_itearation)
-plt.xlabel('iteration')
-plt.ylabel('accuracy')
+#plt.xlabel('iteration')
+#plt.ylabel('accuracy')
 
 #test = nn.testPerceptron(nn.trainPerceptron(data[:,0:4],data[:,4],0.2),data)
 
@@ -95,7 +95,7 @@ plt.ylabel('accuracy')
 #plt.scatter(x=sepal_width_setosa, y=sepal_length_setosa, c='r')
 #plt.scatter(x=sepal_width_other, y=sepal_length_other,c='r',marker='v')
 
-#lt.scatter(x=petal_width_setosa, y=petal_length_setosa, c='b')
+#plt.scatter(x=petal_width_setosa, y=petal_length_setosa, c='b')
 #plt.scatter(x=petal_width_other, y=petal_length_other,c='b', marker='v')
 
 #plt.scatter(x=sepal_length_setosa, y=sepal_width_setosa, c=c_setosa)
@@ -110,4 +110,4 @@ plt.ylabel('accuracy')
 
 plt.show()
 
-input()
+#input()

@@ -3,32 +3,21 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import Perceptron as nn
 
-def setosa (iris):              #function used to conver the iris classification string into numerical values
-    if iris == b'Iris-setosa':
-        return 1
-    else:
-        return 0
-
-def versicolor (iris):            #function used to conver the iris classification string into numerical values
+def versicolor (iris):            #function used to convert the iris classification string into numerical values
     if iris == b'Iris-versicolor':
         return 1
     else:
         return 0
 
-def virginica (iris):            #function used to conver the iris classification string into numerical values
-    if iris == b'Iris-virginica':
-        return 1
-    else:
-        return 0
-
-filename = 'iris.data'
+filename = 'iris.data'                                                  #load the iris dataset
 data = np.loadtxt(filename,delimiter=',',converters={4:versicolor})
-np.random.shuffle(data)
+np.random.shuffle(data)                                                 #shuffle the rows of the datset
 
-iterations = 30
+epochs = 30
 learning_rate = 0.2
+target_accuracy = 78
 
-(weigths, accuracy, accuracy_progression) = nn.perceptronLearning(data,iterations,learning_rate,78)
+(weigths, accuracy, accuracy_progression) = nn.perceptronLearning(data,epochs,learning_rate, target_accuracy)     #run the peceptron learning algorithm
 
 print ('accuracy outside ', nn.testPerceptron(weigths,data))
 

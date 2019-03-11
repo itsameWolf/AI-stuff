@@ -74,7 +74,7 @@ while i:
     pl = float(input('Petal length: ')) 
     pw = float(input('Petal width: '))
 
-    classifier = int(input('which classifier? (1/2): '))
+    classifier = int(input('which classifier? 3 hidden perceptron or 2 hidden perceptron (1/2): '))
 
     if classifier == 1:
         outputs = irisClassifier1(sl, sw, pl, pw)
