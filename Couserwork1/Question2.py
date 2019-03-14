@@ -52,10 +52,10 @@ petal_width_other = data[50:149,3]
 
 
 graphPerceptron (petal_weight,range(2),'b-')
-#graphPerceptron (sepal_weigths,range(6),'r-')
+graphPerceptron (sepal_weigths,range(6),'r-')
 
-#plt.scatter(x=sepal_width_setosa, y=sepal_length_setosa, c='r')
-#plt.scatter(x=sepal_width_other, y=sepal_length_other,c='r',marker='v')
+plt.scatter(x=sepal_width_setosa, y=sepal_length_setosa, c='r')
+plt.scatter(x=sepal_width_other, y=sepal_length_other,c='r',marker='v')
 
 plt.scatter(x=petal_width_setosa, y=petal_length_setosa, c='b')
 plt.scatter(x=petal_width_other, y=petal_length_other,c='b', marker='v')

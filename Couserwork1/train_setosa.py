@@ -9,26 +9,16 @@ def setosa (iris):              #function used to conver the iris classification
     else:
         return 0
 
-def versicolor (iris):            #function used to conver the iris classification string into numerical values
-    if iris == b'Iris-versicolor':
-        return 1
-    else:
-        return 0
-
-def virginica (iris):            #function used to conver the iris classification string into numerical values
-    if iris == b'Iris-virginica':
-        return 1
-    else:
-        return 0
-
 filename = 'iris.data'
-data = np.loadtxt(filename,delimiter=',',converters={4:virginica})
+data = np.loadtxt(filename,delimiter=',',converters={4:setosa})
 np.random.shuffle(data)
 
-iterations = 30
-learning_rate = 0.2
+epochs = 30
+learning_rate = 1
+target_accuracy = 100
 
-(weigths, accuracy, accuracy_progression) = nn.perceptronLearning(data,iterations,learning_rate,98)
+
+(weigths, accuracy, accuracy_progression) = nn.perceptronLearning(data,epochs,learning_rate, target_accuracy)
 
 (tp,tn,fp,fn) = nn.confusionMatrix(weigths,data)
 
