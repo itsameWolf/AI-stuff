@@ -90,16 +90,15 @@ while i:
 
 #for i in range(0, np.ma.size(iris_input,0)):
 
-<<<<<<< HEAD:Question4.py
 #    print(i, irisClassifier1(iris_input[i,0],iris_input[i,1],iris_input[i,2],iris_input[i,3]))
 
 #for i in range(0, np.ma.size(iris_input,0)):
 
 #    print(i, irisClassifier2(iris_input[i,0],iris_input[i,1],iris_input[i,2],iris_input[i,3]))
-=======
+
 #    print(i, irisClassifier(iris_input[i,0],iris_input[i,1],iris_input[i,2],iris_input[i,3]))
 
 #for i in range(0, np.ma.size(iris_input,0)):
 
 #    print(i, irisClassifier(iris_input[i,0],iris_input[i,1],iris_input[i,2],iris_input[i,3]))
->>>>>>> 642768d4038b66ba385ecc70aad9e8c6cf60cf22:Couserwork1/Question4.py
+
